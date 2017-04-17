@@ -26,25 +26,24 @@ StepContainer::~StepContainer()
 
 void StepContainer::addStep()
 {
-    //qDebug() << "Adding a step";
-    //str = str + "STEP";
-
     StepItem* newStep = new StepItem(this, count++, str);
     vlayout->addWidget(newStep);
     itemList.append(newStep);
-    newStep->show();
 
-    //updateWidths();
+    updateWidths();
 }
 
 void StepContainer::updateWidths()
 {
-    //int maxPref = 0;
     for (StepItem* item : itemList)
     {
-        //item->show();
-        qDebug() << item->getNum() << ": "
-                 << QString::number(item->getPrefWidth()) << "width";
+        item->setMinimumWidth(ui->scrollArea->width() - 35);
+        item->setMaximumWidth(ui->scrollArea->width() - 35);
     }
+}
 
+void StepContainer::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
+    updateWidths();
 }

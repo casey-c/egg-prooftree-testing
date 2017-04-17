@@ -1,5 +1,7 @@
 #include "stepitem.h"
 #include "ui_stepitem.h"
+#include <QDebug>
+#include <QFontMetrics>
 
 StepItem::StepItem(QWidget *parent, int c, QString t) :
     QWidget(parent),
@@ -8,6 +10,10 @@ StepItem::StepItem(QWidget *parent, int c, QString t) :
     ui->setupUi(this);
     ui->label_2->setText(QString::number(c));
     ui->label->setText(t);
+
+    // Set up the initial widths
+    prefWidth = ui->label->width() + ui->label_2->width() + 10;
+    qDebug() << "Set initial prefWidth to " << QString::number(prefWidth);
 }
 
 StepItem::~StepItem()
@@ -17,7 +23,9 @@ StepItem::~StepItem()
 
 int StepItem::getPrefWidth()
 {
-    return ui->frame->width();
+    return prefWidth;
+    //return ui->label->width() + ui->label_2->width() + 5;
+    //return ui->frame->width();
 }
 
 QString StepItem::getNum()

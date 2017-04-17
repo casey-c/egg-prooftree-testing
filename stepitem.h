@@ -20,6 +20,8 @@ public:
 
 private:
     Ui::StepItem *ui;
+
+    int prefWidth;
 };
 
 #endif // STEPITEM_H

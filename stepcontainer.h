@@ -30,6 +30,11 @@ private:
     QString str;
 
     void updateWidths();
+    void shrinkWidths();
+    void growWidths();
+
+    // OVERRIDE
+    void resizeEvent(QResizeEvent* event);
 };
 
 #endif // STEPCONTAINER_H
