@@ -38,10 +38,10 @@ void StepItem::mouseReleaseEvent(QMouseEvent *event)
 
 
     // Doesn't work
-    if (QWidget::underMouse())
-        qDebug() << "Under mouse";
-    else
-        qDebug() << "Not under mouse";
+    //if (this->underMouse())
+        //qDebug() << "Under mouse";
+    //else
+        //qDebug() << "Not under mouse";
 
     ui->frame->setFrameStyle(QFrame::Panel | QFrame::Raised);
 }

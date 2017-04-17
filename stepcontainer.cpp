@@ -2,6 +2,7 @@
 #include "ui_stepcontainer.h"
 #include "stepitem.h"
 #include <QDebug>
+#include <QScrollBar>
 
 #define SCROLL_OFFSET 44
 
@@ -55,6 +56,12 @@ void StepContainer::addStep()
     itemList.append(newStep);
 
     updateWidths();
+
+    // Scroll to bottom (kinda ugly)
+    ui->scrollArea->widget()->adjustSize();
+    qApp->processEvents();
+    ui->scrollArea->verticalScrollBar()->setValue(
+                ui->scrollArea->verticalScrollBar()->maximum() );
 }
 
 void StepContainer::updateWidths()
