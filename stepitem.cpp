@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QFontMetrics>
 
-StepItem::StepItem(QWidget *parent, int c, QString t) :
+StepItem::StepItem(QWidget* parent, int c, QString t) :
     QWidget(parent),
     ui(new Ui::StepItem)
 {
@@ -11,9 +11,12 @@ StepItem::StepItem(QWidget *parent, int c, QString t) :
     ui->label_2->setText(QString::number(c));
     ui->label->setText(t);
 
-    // Set up the initial widths
-    prefWidth = ui->label->width() + ui->label_2->width() + 10;
-    qDebug() << "Set initial prefWidth to " << QString::number(prefWidth);
+    // Palette stuff
+    QPalette palette = ui->frame->palette();
+    palette.setColor( backgroundRole(), QColor( 140, 140, 160 ) );
+
+    ui->frame->setPalette(palette);
+    ui->frame->setAutoFillBackground(false);
 }
 
 StepItem::~StepItem()
@@ -21,15 +24,38 @@ StepItem::~StepItem()
     delete ui;
 }
 
-int StepItem::getPrefWidth()
+void StepItem::mousePressEvent(QMouseEvent *event)
 {
-    return prefWidth;
-    //return ui->label->width() + ui->label_2->width() + 5;
-    //return ui->frame->width();
+    QWidget::mousePressEvent(event);
+    qDebug() << "Clicked widget " << ui->label_2->text();
+    ui->frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 }
 
-QString StepItem::getNum()
+void StepItem::mouseReleaseEvent(QMouseEvent *event)
 {
-    return ui->label_2->text();
+    QWidget::mouseReleaseEvent(event);
+    qDebug() << "Released widget" << ui->label_2->text();
+
+
+    // Doesn't work
+    if (QWidget::underMouse())
+        qDebug() << "Under mouse";
+    else
+        qDebug() << "Not under mouse";
+
+    ui->frame->setFrameStyle(QFrame::Panel | QFrame::Raised);
 }
 
+void StepItem::enterEvent(QEvent *event)
+{
+    QWidget::enterEvent(event);
+    qDebug() << "Entered widget" << ui->label_2->text();
+    ui->frame->setAutoFillBackground(true);
+}
+
+void StepItem::leaveEvent(QEvent *event)
+{
+    QWidget::leaveEvent(event);
+    qDebug() << "Left widget" << ui->label_2->text();
+    ui->frame->setAutoFillBackground(false);
+}
