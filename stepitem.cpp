@@ -34,7 +34,7 @@ void StepItem::mousePressEvent(QMouseEvent *event)
 void StepItem::mouseReleaseEvent(QMouseEvent *event)
 {
     QWidget::mouseReleaseEvent(event);
-    qDebug() << "Released widget" << ui->label_2->text();
+    //qDebug() << "Released widget" << ui->label_2->text();
 
 
     // Doesn't work
@@ -49,13 +49,13 @@ void StepItem::mouseReleaseEvent(QMouseEvent *event)
 void StepItem::enterEvent(QEvent *event)
 {
     QWidget::enterEvent(event);
-    qDebug() << "Entered widget" << ui->label_2->text();
+    //qDebug() << "Entered widget" << ui->label_2->text();
     ui->frame->setAutoFillBackground(true);
 }
 
 void StepItem::leaveEvent(QEvent *event)
 {
     QWidget::leaveEvent(event);
-    qDebug() << "Left widget" << ui->label_2->text();
+    //qDebug() << "Left widget" << ui->label_2->text();
     ui->frame->setAutoFillBackground(false);
 }
